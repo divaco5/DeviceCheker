@@ -1,0 +1,19 @@
+# current_dir = "deviceChecker/"
+# str
+DeviceListPath: "device_list.csv"
+OutputReportPath: "report/"
+LogPath: "log/"
+
+# The interval is in seconds.
+# int
+Interval: 2
+# Threads is execution unit of a program's operations
+# int
+Threads:  3
+# Count is number of times to check
+# int
+Count: 3
+# ContinueMode is continualy execute. 
+# True/False
+# If it is False, then the Count takes precedence.
+ContinueMode: False

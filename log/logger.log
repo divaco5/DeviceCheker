@@ -1,0 +1,16 @@
+ERROR:__main__:[ERROR]device_id:123456 is not avalable
+ERROR:__main__:[ERROR]device_id:123456 is not avalable
+ERROR:__main__:[ERROR]device_id:123456 is not avalable
+ERROR:__main__:[ERROR]device_id:123456 is not avalable
+ERROR:__main__:[ERROR]device_id:123456 is not avalable
+ERROR:__main__:[ERROR]device_id:123456 is not avalable
+ERROR:__main__:[ERROR]Interval is not int. please set int value
+ERROR:__main__:[ERROR]Interval is not int. please set int value
+ERROR:__main__:[ERROR]Threads is not int. please set int value
+ERROR:__main__:[ERROR]Threads is not int. please set int value
+ERROR:__main__:[ERROR]Count is not int. please set int value
+ERROR:__main__:[ERROR]ContinueMode is not setting. please set True/False
+ERROR:__main__:[ERROR]Count is not int. please set int value
+ERROR:__main__:[ERROR](DeviceListPath)Cannot find the file specified
+ERROR:__main__:[ERROR](OutputReportPath)Cannot find the folder specified
+ERROR:__main__:[ERROR](DeviceListPath)The file specified is empty

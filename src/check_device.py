@@ -4,6 +4,7 @@ import subprocess
 import yaml
 import logging
 import sys
+import requests
 import pandas as pd
 import os.path
 from datetime import datetime
@@ -62,6 +63,8 @@ class DeviceChecker(object):
         self._threads_max      = setting['Threads']
         self._count_max        = setting['Count']
         self._contine_mode     = setting['ContinueMode']
+        self._slack_token      = setting['SlackToken']
+        self._slack_channel    = setting['SlackChannel']
 
         self._init_value_error_check()
 
@@ -186,16 +189,17 @@ class DeviceChecker(object):
         Note:
         """
         _start_date_str = str(datetime.now())
+        _start_time = int(datetime.now().strftime('%s'))
+        
         while int(datetime.now().strftime('%s')) - _start_time < self._interval_sec:
             time.sleep(0.1)
-        _start_time = int(datetime.now().strftime('%s'))
-        # Make sure the device is working.
-        # check_device(i)
+
         threads = []
         with futures.ThreadPoolExecutor(max_workers=self._threads_max) as executor:
             for j in range(self._device_count):
                 future = executor.submit(fn=self._check_device(self._device_list[j]))
                 threads.append(future)
+                print(future)
             _ = futures.as_completed(fs=threads)
         print(_start_date_str)
         # report output
@@ -221,6 +225,17 @@ class DeviceChecker(object):
         #error check
         if 'error occurred' in lines[-1]:
             logger.error("[ERROR]device_id:{} is not avalable".format(device_id))
+        elif 'false' in lines[-1]:
+            print("chatbot")
+            # if the status of device is false, share the message using slack bot
+            output_message = lines[-1] + date_str + " |" 
+            url = "https://slack.com/api/chat.postMessage"
+            data = {
+            "token": self._slack_token,
+            "channel": self._slack_channel,
+            "text": output_message
+            }
+            requests.post(url, data=data)
         else:      
             extract_status = lines[-1] + date_str + " |" 
             print(extract_status)
